@@ -19,8 +19,8 @@
 const char* ssid = "CHANGEME";
 const char* password = "CHANGEME";
 
-const char* dashboardServerUrl = "CHANGEME";
-const int dashboardServerPort = 10465;
+const char* dashboardServerUrl = "CHANGEME";    // Most likely IP address of local server
+const int dashboardServerPort = 10465;          // Exposed port defined in docker-compose.yml
 const int numScreens = 2;
 const unsigned long refreshTime_usec = 3600 * 1000000;   // 1 hour
 

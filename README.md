@@ -25,7 +25,8 @@ the NY Times.
    - These are written for my particular use case on a Synology NAS.
    - Make sure you have the latest version of your Image from Docker (may have to search it in the 
      Registry & download again)
-   - In File Station, create folders `docker/inkdash` and `docker/inkdash/static`.
+   - In File Station, create folders `docker/inkdash`, `inkdash/static`, & `inkdash/static/render`;
+     set permissions to be accessible from everyone
    - Container Manager > Project > Create
      - Project Name: `inkdash-server`
      - Path: `/volume1/docker/inkdash`
@@ -112,10 +113,6 @@ You can change them as needed to push to your own repo.
 - `docker_push.sh` - push an updated version of the Docker container to Docker Hub
 - `docker_run.sh` - locally run this Docker instance so you can test that it works
 - `run_server.sh` - locally start up the Flask server (w/o Docker); accessible at http://127.0.0.1:10465
-
-
-## Arduino Operations
-
 
 
 ## Acknowledgements
