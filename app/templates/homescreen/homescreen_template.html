@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homescreen Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Left Column -->
+        <div class="col-md-6">
+
+            <!-- Day of the Week -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-6 date-padding">
+                            <div>
+                                <p class="calendar-text text-right">
+                                    {{ today.strftime('%A') }}<br/>
+                                    {{ today.strftime('%B') }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 date-padding">
+                            <div class="text-left">
+                                <p class="calendar-num">{{ today.day }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+
+            <!-- Todoist Tasks -->
+            <div class="row">
+                <div class="col-12">
+                    {% include 'homescreen/todoist_tasks.html' %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-6">
+            <!-- Weather -->
+            <div class="row align-items-start ">
+                <div class="col-12">
+                {% include 'homescreen/weather.html' %}
+                </div>
+            </div>
+            <hr/>
+
+            <!-- Upcoming Calendar Events -->
+            <div class="row">
+                <div class="col-12">
+                {% include 'homescreen/gcal_events.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{#
+Context values required:
+- taks: List[TodoistTask]
+- max_tasks: int
+- today: datetime
+- timedelta: timedelta package
+#}
+
+{% set task_counter = namespace(value=-2) %} {# https://stackoverflow.com/a/49699589 #}
+{% for task in tasks %}
+    {% set task_summary  = task.summary %}
+    {% set task_priority = task.priority %}
+    {% set task_date     = task.due_date %}
+    {% set task_time     = task.due_time %}
+
+    <!-- Day Header -->
+    {% if loop.index == 1 or task_date != tasks[loop.index0 - 1].due_date %}
+        <!-- Increment counter extra when there's a day split -->
+        {% set task_counter.value = task_counter.value + 2 %}
+        {% if task_counter.value >= max_tasks %}
+            {% break %}
+        {% endif %}
+
+        <!-- Day of task -->
+        <h2>
+            {% if task_date == today.date() %}
+                Today's Tasks
+            {% elif task_date == (today + timedelta(days=1)).date() %}
+                Tomorrow's Tasks
+            {% else %}
+                {{ task_date.strftime('%A') }}'s Tasks
+            {% endif %}
+        </h2>
+    {% endif %}
+
+    <!-- Task Summary -->
+    <li class="task task-p{{ task_priority }}">
+        {% if task_time %}
+            <span class="task-time">{{ task_time.strftime('%-I:%M%p').lower() }}</span>
+        {% endif %}
+        {{ task_summary }}
+    </li>
+
+    {% set task_counter.value = task_counter.value + 1 %}
+    {% if task_counter.value >= max_tasks %}
+        {% break %}
+    {% endif %}
+{% endfor %}

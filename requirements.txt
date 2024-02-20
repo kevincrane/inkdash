@@ -1,0 +1,16 @@
+emoji>=2.10.1
+flask==3.0.0
+Flask-APScheduler==1.13.1
+Pillow==10.2.0
+pymupdf==1.23.15
+python-dotenv==1.0.0
+pyowm>=3.3.0
+requests==2.31.0
+selenium==4.17.2
+todoist-api-python>=2.1.3
+
+# Google calendar
+gcsa>=2.2.0
+
+# Hack to fix bug: https://github.com/urllib3/urllib3/issues/3020
+urllib3==1.26.6

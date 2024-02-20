@@ -1,0 +1,21 @@
+version: '3.11'
+services:
+  inkplate-dashboard:
+    image: kevincrane/inkplate-dashboard-server:latest
+    container_name: inkplate-dashboard-server
+    user: appuser
+    ports:
+      - "10465:5000"
+    volumes:
+      - ./static:/app/static
+    # If you are running this from a location that doesn't support local .env files (e.g. Synology
+    # NAS), copy those values below instead and comment the env_file block
+    env_file:
+      - .env
+#    environment:
+#      # Calendar IDs (emails, comma-separated)
+#      - CALENDAR_IDS=<YOUR_CALENDAR_EMAILS>
+#      # Todoist API Key (https://app.todoist.com/app/settings/integrations/developer)
+#      - TODOIST_API_KEY=<YOUR_API_KEY>
+#      # Open Weather Map API Key (https://home.openweathermap.org/api_keys)
+#      - OWM_API_KEY=<YOUR_API_KEY>

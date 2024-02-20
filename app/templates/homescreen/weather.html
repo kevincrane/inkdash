@@ -1,0 +1,63 @@
+{#
+Context values required:
+- weather: OneCall (pyowm API response)
+- today: datetime
+- timedelta: timedelta package
+#}
+
+<!-- Next Hour -->
+<div class="col-md-4">
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <i class="wi wi-owm-{{ weather.forecast_hourly[1].weather_code }}"></i>
+        </div>
+    </div>
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <h3>
+                Next Hour<br/>
+                {{ weather.forecast_hourly[1].status|title }} | {{ (weather.forecast_hourly[1].temp['temp'])|round|int }}°
+{#                    {{ weather.forecast_hourly[1].detailed_status|title }} | {{ (weather.forecast_hourly[1].temp['temp'])|round|int }}°#}
+            </h3>
+        </div>
+    </div>
+</div>
+<!-- Today -->
+<div class="col-md-4">
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <i class="wi wi-owm-{{ weather.forecast_daily[0].weather_code }}"></i>
+        </div>
+    </div>
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <h3>Today<br/>H: {{ weather.forecast_daily[0].temp['max']|round|int }}° L: {{ weather.forecast_daily[0].temp['min']|round|int }}°</h3>
+        </div>
+    </div>
+</div>
+<!-- Tomorrow -->
+<div class="col-md-4">
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <i class="wi wi-owm-{{ weather.forecast_daily[1].weather_code }}"></i>
+        </div>
+    </div>
+    <div class="row align-items-start ">
+        <div class="col-md-12 text-center">
+            <h3>Tomorrow<br/>H: {{ weather.forecast_daily[1].temp['max']|round|int }}° L: {{ weather.forecast_daily[1].temp['min']|round|int }}°</h3>
+        </div>
+    </div>
+</div>
+<!-- Next Day -->
+{#<div class="col-md-4">#}
+{#    <div class="row align-items-start ">#}
+{#        <div class="col-md-12 text-center">#}
+{#            <i class="wi wi-owm-{{ weather.forecast_daily[2].weather_code }}"></i>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row align-items-start ">#}
+{#        <div class="col-md-12 text-center">#}
+{#            <h3>{{ (today + timedelta(days=2)).strftime('%A') }}<br/>H: {{ weather.forecast_daily[2].temp['max']|round|int }}° L: {{ weather.forecast_daily[2].temp['min']|round|int }}°</h3>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

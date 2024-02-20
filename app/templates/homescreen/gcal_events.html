@@ -1,0 +1,44 @@
+{#
+Context values required:
+- events: List[CalendarEvent]
+- max_events: int
+- today: datetime
+- timedelta: timedelta package
+#}
+
+{% set event_counter = namespace(value=-2) %} {# https://stackoverflow.com/a/49699589 #}
+{% for event in events %}
+    {% set event_time  = event.start_time %}
+    {% set event_title = event.summary %}
+
+    <!-- Day Header -->
+    {% if loop.index == 1 or event_time.date() != events[loop.index0 - 1].start_time.date() %}
+        <!-- Increment counter extra when there's a day split -->
+        {% set event_counter.value = event_counter.value + 2 %}
+        {% if event_counter.value >= max_events %}
+            {% break %}
+        {% endif %}
+
+        <!-- Day of events -->
+        <h2>
+            {% if event_time.date() == today.date() %}
+                Today
+            {% elif event_time.date() == (today + timedelta(days=1)).date() %}
+                Tomorrow
+            {% else %}
+                {{ event_time.strftime('%A') }}
+                {# {{ event_time.strftime('%A, %B %d') }} #}
+            {% endif %}
+        </h2>
+    {% endif %}
+
+    <!-- Event Summary -->
+    <li class="event">
+        <span class="event-time">{{ event_time.strftime('%-I:%M%p').lower() }}</span> {{ event_title }}
+    </li>
+
+    {% set event_counter.value = event_counter.value + 1 %}
+    {% if event_counter.value >= max_events %}
+        {% break %}
+    {% endif %}
+{% endfor %}
