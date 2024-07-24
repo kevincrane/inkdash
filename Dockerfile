@@ -4,7 +4,7 @@
 # Hosted on server at: http://0.0.0.0:10465
 
 # Use an official Python runtime as a base image
-FROM selenium/standalone-chrome:latest
+FROM selenium/standalone-chrome:124.0
 
 # Keeps Python from buffering stdout and stderr to avoid situations where
 # the application crashes without emitting any logs due to buffering.

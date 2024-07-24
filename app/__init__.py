@@ -1,6 +1,7 @@
 import logging
 import os
 
+from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 from flask import Flask
 from flask_apscheduler import APScheduler
@@ -17,7 +18,7 @@ STATIC_PATH = os.path.join(app.root_path, app.static_folder)
 TEMPLATE_PATH = os.path.join(app.root_path, app.template_folder)
 
 # Runs asynchronous scheduled jobs
-scheduler = APScheduler()
+scheduler = APScheduler(scheduler=BackgroundScheduler(job_defaults={'max_instances': 1000}))
 scheduler.init_app(app)
 scheduler.start()
 
