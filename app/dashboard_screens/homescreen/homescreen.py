@@ -5,7 +5,7 @@ from os import path
 
 import pytz
 from flask import render_template
-from pyowm.weatherapi25.one_call import OneCall
+from pyowm.weatherapi30.one_call import OneCall
 
 from app import TEMPLATE_PATH
 from app.config import OWM_API_KEY, WEATHER_LON, WEATHER_LAT, CALENDAR_IDS, TIMEZONE

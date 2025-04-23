@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytz
 from pyowm import OWM
-from pyowm.weatherapi25 import one_call
+from pyowm.weatherapi30 import one_call
 
 from app.config import TIMEZONE
 

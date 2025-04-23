@@ -1,7 +1,8 @@
 version: '3.11'
 services:
   inkplate-dashboard:
-    image: kevincrane/inkplate-dashboard-server:latest
+    # image: kevincrane/inkplate-dashboard-server:latest
+    image: inkplate-dashboard-server:latest
     container_name: inkplate-dashboard-server
     user: appuser
     ports:
