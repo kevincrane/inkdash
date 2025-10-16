@@ -45,7 +45,6 @@ RUN python -m pip install --upgrade pip
 
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt .
-COPY wheel ./wheel
 RUN pip install --ignore-installed --no-cache-dir -r requirements.txt
 
 # Copy the app directory contents into the container at /app
