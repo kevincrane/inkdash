@@ -3,6 +3,7 @@ flask==3.0.0
 Flask-APScheduler==1.13.1
 Pillow==10.2.0
 pymupdf==1.23.15
+pyowm>=3.5.0
 pytz>=2024.1
 python-dotenv==1.0.0
 requests==2.31.0
@@ -14,24 +15,3 @@ gcsa>=2.2.0
 
 # Hack to fix bug: https://github.com/urllib3/urllib3/issues/3020
 urllib3==1.26.6
-
-
-# pyowm>=3.3.0      <- can uncomment this and delete the following line if/when fixed
-wheel/pyowm-3.3.0-py3-none-any.whl
-
-##########
-### Stupid OpenWeatherMap (pyowm) hack
-# OpenWeatherMap deprecated their v2.5 API on 4/8/25; pyowm has fixed this by updating
-# to the v3.0 but hasn't done a release yet. Needs to use git master branch until a new
-# release is seen (current latest is 3.3.0): https://github.com/csparpa/pyowm/releases
-#
-# 1. git clone https://github.com/csparpa/pyowm.git
-# 2. cd pyowm
-# 3. python -m venv .venv
-# 4. source .venv/bin/activate
-# 5. pip install setuptools wheel
-# 6. pip install -r requirements.txt
-# 7. python setup.py bdist_wheel
-# 8. cd ..
-# 9. cp pyowm/dist/pyowm-3.3.0-py3-none-any.whl wheel/
-##########
