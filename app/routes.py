@@ -47,13 +47,13 @@ def rendering_task():
             page1_homescreen_render()
             logging.info('Page1 rendering completed successfully')
         except Exception as e:
-            logging.error(f'Failed to render page1: {e}', exc_info=True)
+            logging.exception('Failed to render page1')
 
         try:
             logging.info('Rendering page2 (newspaper)...')
             page2_newspaper_render()
             logging.info('Page2 rendering completed successfully')
         except Exception as e:
-            logging.error(f'Failed to render page2: {e}', exc_info=True)
+            logging.exception('Failed to render page2')
 
     logging.info('Page rendering jobs completed')
