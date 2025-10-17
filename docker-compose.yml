@@ -1,9 +1,9 @@
-version: '3.11'
 services:
   inkplate-dashboard:
     # image: kevincrane/inkplate-dashboard-server:latest
     image: inkplate-dashboard-server:latest
     container_name: inkplate-dashboard-server
+    # platform: linux/amd64
     user: appuser
     ports:
       - "10465:5000"

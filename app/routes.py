@@ -42,5 +42,18 @@ def rendering_task():
     """
     logging.info('Running page rendering jobs...')
     with app.app_context():
-        page1_homescreen_render()
-        page2_newspaper_render()
+        try:
+            logging.info('Rendering page1 (homescreen)...')
+            page1_homescreen_render()
+            logging.info('Page1 rendering completed successfully')
+        except Exception as e:
+            logging.exception('Failed to render page1')
+
+        try:
+            logging.info('Rendering page2 (newspaper)...')
+            page2_newspaper_render()
+            logging.info('Page2 rendering completed successfully')
+        except Exception as e:
+            logging.exception('Failed to render page2')
+
+    logging.info('Page rendering jobs completed')

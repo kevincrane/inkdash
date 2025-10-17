@@ -18,7 +18,7 @@ STATIC_PATH = os.path.join(app.root_path, app.static_folder)
 TEMPLATE_PATH = os.path.join(app.root_path, app.template_folder)
 
 # Runs asynchronous scheduled jobs
-scheduler = APScheduler(scheduler=BackgroundScheduler(job_defaults={'max_instances': 1000}))
+scheduler = APScheduler(scheduler=BackgroundScheduler())
 scheduler.init_app(app)
 scheduler.start()
 
@@ -26,5 +26,14 @@ scheduler.start()
 from app import routes
 
 # Configure asynchronous rendering jobs to run at :00 and :30 of each hour
-scheduler.add_job(id='rendering_task', func=routes.rendering_task, trigger='cron', minute='00,30')
+# max_instances=3 allows a new job to start even if previous one is stuck,
+# while preventing runaway job accumulation
+scheduler.add_job(
+    id='rendering_task',
+    func=routes.rendering_task,
+    trigger='cron',
+    minute='00,30',
+    max_instances=3,
+    misfire_grace_time=600  # Allow up to 10 minutes late execution if scheduler was busy
+)
 # routes.rendering_task()   # TODO KEVIN: maybe re-enable this

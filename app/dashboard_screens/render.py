@@ -18,9 +18,14 @@ def html_to_bmp(html_path: str, output_path: str):
     options.add_argument(f'--window-size={INKPLATE_SCREEN_WIDTH},{INKPLATE_SCREEN_HEIGHT}')
     options.add_argument('--hide-scrollbars')
     options.add_argument('--force-device-scale-factor=1')
+    # options.add_argument('--no-sandbox')  # Required for Docker/containerized environments
+    # options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource problems
+    # options.add_argument('--font-render-hinting=none')  # Preserve original font rendering
 
     # Choose Chrome as the browser; screenshot as a PNG
     with webdriver.Chrome(options=options) as driver:
+        driver.set_page_load_timeout(30)  # Prevent hanging on page load
+        driver.set_script_timeout(30)  # Prevent hanging on script execution
         driver.set_window_size(INKPLATE_SCREEN_WIDTH, INKPLATE_SCREEN_HEIGHT)
         driver.set_network_conditions(offline=False,
                                       latency=0,  # additional latency (ms)
