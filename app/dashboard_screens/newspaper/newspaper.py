@@ -30,15 +30,15 @@ class NewspaperScreen(DashboardScreen):
         today = datetime.now()
         nyt_url = self.NYT_SCAN_URL.format(year=today.year, month=today.month, day=today.day)
 
-        # Make a request to the NYT URL
-        response = requests.get(nyt_url)
+        # Make a request to the NYT URL with timeout to prevent hanging
+        response = requests.get(nyt_url, timeout=30)
         if response.status_code == 200:
             # Save the content to a file in the static directory
             with open(pdf_path, 'wb') as file:
                 file.write(response.content)
             self.app.logger.info(f'NYT frontpage for {today.month}/{today.day}/{today.year} saved to {pdf_path}')
         else:
-            self.app.logger.info(f'Failed to download the NYT scan. Status code: {response.status_code}')
+            self.app.logger.warning(f'Failed to download the NYT scan. Status code: {response.status_code}')
 
     def __render_pdf_for_eink_display(self):
         """ Scales, crops, and converts the nytfrontpage.pdf file for e-ink display;
