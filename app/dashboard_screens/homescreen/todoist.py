@@ -20,13 +20,23 @@ class TodoistTask:
 
     @staticmethod
     def model_to_task(task_model: models.Task) -> TodoistTask:
+        due = task_model.due
+        due_value = due.date
+
+        if isinstance(due_value, datetime):
+            task_due_date = due_value.date()
+            task_due_time = due_value
+        else:
+            task_due_date = due_value
+            task_due_time = None
+
         return TodoistTask(
             summary=task_model.content,
             description=task_model.description,
             priority=task_model.priority,
             order=task_model.order,
-            due_date=datetime.strptime(task_model.due.date, '%Y-%m-%d').date(),
-            due_time=datetime.strptime(task_model.due.datetime, '%Y-%m-%dT%H:%M:%S') if task_model.due.datetime else None,
+            due_date=task_due_date,
+            due_time=task_due_time,
         )
 
 
