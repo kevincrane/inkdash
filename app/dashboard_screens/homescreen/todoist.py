@@ -49,7 +49,8 @@ class Todoist:
         return self.__get_tasks_by_filter(next_tasks_filter)
 
     def __get_tasks_by_filter(self, todoist_filter: str) -> list[TodoistTask]:
-        task_models = self._api.get_tasks(filter=todoist_filter)
+        task_batches = self._api.filter_tasks(query=todoist_filter)
+        task_models = [task for batch in task_batches for task in batch]
         tasks = list(map(TodoistTask.model_to_task, task_models))
 
         # Sort by: due date, if it has a due time, priority (descending), order
