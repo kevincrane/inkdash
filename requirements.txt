@@ -6,7 +6,7 @@ pymupdf==1.23.15
 pyowm>=3.5.0
 pytz>=2024.1
 python-dotenv==1.0.0
-requests==2.31.0
+requests>=2.32.3
 selenium==4.17.2
 todoist-api-python>=3.0.1
 
